@@ -3,150 +3,182 @@ const password = "123";
 
 const pageContainer = document.getElementById("page-container");
 
+function createElement(tag, options = {}) {
+  const element = document.createElement(tag);
+  if (options.class) element.className = options.class;
+  if (options.id) element.id = options.id;
+  if (options.for) element.htmlFor = options.for;
+  if (options.type) element.type = options.type;
+  if (options.name) element.name = options.name;
+  if (options.required) element.required = true;
+  if (options.text) element.textContent = options.text;
+  if (options.href) element.href = options.href;
+  return element;
+}
+
+function createInputGroup(labelText, inputOptions) {
+  const group = createElement("div", { 
+    class: "form-group" 
+  });
+
+  const label = createElement("label", {
+    for: inputOptions.id,
+    text: labelText
+  });
+
+  group.appendChild(label);
+  group.appendChild(document.createElement("br"));
+
+  const input = createElement("input", inputOptions);
+  group.appendChild(input);
+
+  return group;
+}
+
+function createRememberMe() {
+  const label = createElement("label");
+
+  const input = createElement("input", {
+    type: "checkbox",
+    id: "rememberMe",
+    name: "rememberMe"
+  });
+
+  label.appendChild(input);
+  label.appendChild(document.createTextNode(" Kom ihåg mig"));
+
+  return label;
+}
+
+function createForgotPassword() {
+  const label = createElement("label", { 
+    id: "forgotPassword" 
+  });
+
+  const link = createElement("a", { 
+    href: "#", 
+    text: "Glömt lösenord?" 
+  });
+
+  label.appendChild(link);
+
+  return label;
+}
+
 function renderLoginForm() {
-    pageContainer.innerHTML = "";
-        const pageBorder = document.createElement("div");
-        pageBorder.className = "page-border";
+  pageContainer.innerHTML = "";
 
-        const h2 = document.createElement("h2");
-        h2.textContent = "LOGIN";
-        pageBorder.appendChild(h2);
+  const pageBorder = createElement("div", { 
+    class: "page-border" 
+  });
 
-        const form = document.createElement("form");
-        form.id = "loginForm";
+  const h2 = createElement("h2", { 
+    text: "LOGIN" 
+  });
+  pageBorder.appendChild(h2);
 
-        const userGroup = document.createElement("div");
-        userGroup.className = "form-group";
-        const userLabel = document.createElement("label");
-        userLabel.htmlFor = "username";
-        userLabel.textContent = "NAMN";
-        userGroup.appendChild(userLabel);
+  const form = createElement("form", { 
+    id: "loginForm" 
+  });
 
-        userGroup.appendChild(document.createElement("br"));
+  form.appendChild(
+    createInputGroup("NAMN", {
+      type: "text",
+      id: "username",
+      name: "username",
+      required: true
+    })
+  );
 
-        const userInput = document.createElement("input");
-        userInput.type = "text";
-        userInput.id = "username";
-        userInput.name = "username";
-        userInput.required = true;
-        userGroup.appendChild(userInput);
-        form.appendChild(userGroup);
+  form.appendChild(
+    createInputGroup("LÖSENORD", {
+      type: "password",
+      id: "password",
+      name: "password",
+      required: true
+    })
+  );
 
-        const passGroup = document.createElement("div");
-        passGroup.className = "form-group";
-        const passLabel = document.createElement("label");
-        passLabel.htmlFor = "password";
-        passLabel.textContent = "LÖSENORD";
-        passGroup.appendChild(passLabel);
+  form.appendChild(createRememberMe());
+  form.appendChild(document.createElement("br"));
+  form.appendChild(createForgotPassword());
+  form.appendChild(document.createElement("br"));
 
-        passGroup.appendChild(document.createElement("br"));
+  const loginButton = createElement("button", {
+    id: "loginButton",
+    type: "submit",
+    text: "Logga in"
+  });
+  form.appendChild(loginButton);
 
-        const passInput = document.createElement("input");
-        passInput.type = "password";
-        passInput.id = "password";
-        passInput.name = "password";
-        passInput.required = true;
-        passGroup.appendChild(passInput);
-        form.appendChild(passGroup);
+  pageBorder.appendChild(form);
+  pageContainer.appendChild(pageBorder);
 
-        const rememberLabel = document.createElement("label");
-        const rememberInput = document.createElement("input");
-        rememberInput.type = "checkbox";
-        rememberInput.id = "rememberMe";
-        rememberInput.name = "rememberMe";
-        rememberLabel.appendChild(rememberInput);
-        rememberLabel.appendChild(document.createTextNode(" Kom ihåg mig"));
-        form.appendChild(rememberLabel);
-
-        form.appendChild(document.createElement("br"));
-
-        const forgotLabel = document.createElement("label");
-        forgotLabel.id = "forgotPassword";
-        const forgotLink = document.createElement("a");
-        forgotLink.href = "#";
-        forgotLink.textContent = "Glömt lösenord?";
-        forgotLabel.appendChild(forgotLink);
-        form.appendChild(forgotLabel);
-
-        form.appendChild(document.createElement("br"));
-
-        const loginButton = document.createElement("button");
-        loginButton.id = "loginButton";
-        loginButton.type = "submit";
-        loginButton.textContent = "Logga in";
-        form.appendChild(loginButton);
-
-        pageBorder.appendChild(form);
-        pageContainer.appendChild(pageBorder);
-        document.body.appendChild(pageContainer);
-
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      login();
-    });
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    login();
+  });
 }
 
 function logout() {
-    renderLoginForm();
-}   
+  renderLoginForm();
+}
 
 window.addEventListener("DOMContentLoaded", renderLoginForm);
 
 function login() {
-    let inputUsername = document.getElementById("username").value.toLowerCase();
-    let inputPassword = document.getElementById("password").value;
-
-    if (inputUsername === username && inputPassword === password) {
-        welcomePage();
-    } else {
-        errorPage();
-    }
+  const inputUsername = document.getElementById("username").value.toLowerCase();
+  const inputPassword = document.getElementById("password").value;
+  if (inputUsername === username && inputPassword === password) {
+    welcomePage();
+  } else {
+    errorPage();
+  }
 }
 
-document.getElementById("loginForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-    login();
-});
-
 function welcomePage() {
-    pageContainer.innerHTML = "";
+  pageContainer.innerHTML = "";
 
-    const h2 = document.createElement("h2");
-    h2.textContent = `Välkommen, ${username.toUpperCase()}!`;
-    pageContainer.appendChild(h2);
+  const h2 = createElement("h2", {
+    text: `Välkommen, ${username.toUpperCase()}!`
+  });
+  pageContainer.appendChild(h2);
 
-    const br = document.createElement("br");
-    pageContainer.appendChild(br);
+  pageContainer.appendChild(document.createElement("br"));
 
-    const p = document.createElement("p");
-    p.textContent = "Du är nu inloggad.";
-    pageContainer.appendChild(p);
+  const p = createElement("p", {
+    text: "Du är nu inloggad."
+  });
+  pageContainer.appendChild(p);
 
-    const logoutButton = document.createElement("button");
-    logoutButton.id = "logoutButton";
-    logoutButton.textContent = "Logga ut";
-    pageContainer.appendChild(logoutButton);
+  const logoutButton = createElement("button", {
+    id: "logoutButton",
+    text: "Logga ut"
+  });
 
-    document.getElementById("logoutButton").onclick = () => logout();
+  pageContainer.appendChild(logoutButton);
+
+  logoutButton.onclick = logout;
 }
 
 function errorPage() {
-    pageContainer.innerHTML = "";
+  pageContainer.innerHTML = "";
 
-    const h1 = document.createElement("h1");
-    h1.textContent = "Inloggning misslyckades";
-    pageContainer.appendChild(h1);
+  const h1 = createElement("h1", {
+    text: "Inloggning misslyckades"
+  });
+  pageContainer.appendChild(h1);
+  const p = createElement("p", {
+    text: "Kontrollera ditt namn och lösenord och försök igen."
+  });
+  pageContainer.appendChild(p);
 
-    const p = document.createElement("p");
-    p.textContent = "Kontrollera ditt namn och lösenord och försök igen.";
-    pageContainer.appendChild(p);
+  const backButton = createElement("button", {
+    id: "backButton",
+    text: "Tillbaka"
+  });
 
-    const backButton = document.createElement("button");
-    backButton.id = "backButton";
-    backButton.textContent = "Tillbaka";
-    pageContainer.appendChild(backButton);
-
-    backButton.onclick = () => {
-        logout();
-    };
+  pageContainer.appendChild(backButton);
+  
+  backButton.onclick = logout;
 }
