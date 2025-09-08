@@ -1,8 +1,6 @@
 export {
   createElement,
-  createInputGroup,
-  createRememberMe,
-  createForgotPassword
+  createInputGroup
 };
 
 /*
@@ -48,8 +46,9 @@ function createInputGroup(labelText, inputOptions) {
   /* 
     group är div elementet vi skapade ovan 
     appendChild lägger vi till elementen i div elementet
-    */
+  */
   group.appendChild(label);
+
   group.appendChild(document.createElement("br"));
 
   /* 
@@ -62,38 +61,4 @@ function createInputGroup(labelText, inputOptions) {
     Returnerar hela gruppen med label och input 
     */
   return group;
-}
-
-/* 
-Lades till bara för att skapa checkboxen "Kom ihåg mig" 
-*/
-function createRememberMe() {
-  const label = createElement("label");
-
-  const input = createElement("input", {
-    type: "checkbox",
-    id: "rememberMe",
-    name: "rememberMe"
-  });
-  label.appendChild(input);
-  label.appendChild(document.createTextNode(" Kom ihåg mig"));
-
-  return label;
-}
-
-/* 
-Lades till bara för att skapa länken "Glömt lösenord?" 
-*/
-function createForgotPassword() {
-  const label = createElement("label", {
-    id: "forgotPassword"
-  });
-
-  const link = createElement("a", {
-    href: "#",
-    text: "Glömt lösenord?"
-  });
-  label.appendChild(link);
-
-  return label;
 }

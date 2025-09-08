@@ -2,7 +2,7 @@
 Importerar funktioner från helpers.js som skapar HTML-element 
 utan att behöva skriva samma kod flera gånger
 */
-import { createElement, createInputGroup, createRememberMe, createForgotPassword } from './helpers.js';
+import { createElement, createInputGroup} from './helpers.js';
 import { animate } from './animations.js';
 animate();
 
@@ -117,8 +117,6 @@ function loginPage() {
         })
     );
 
-    form.appendChild(createRememberMe());
-    form.appendChild(createForgotPassword());
     form.appendChild(document.createElement("br"));
 
     const loginButton = createElement("button", {
