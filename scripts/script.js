@@ -3,6 +3,8 @@ Importerar funktioner från helpers.js som skapar HTML-element
 utan att behöva skriva samma kod flera gånger
 */
 import { createElement, createInputGroup, createRememberMe, createForgotPassword } from './helpers.js';
+import { animate } from './animations.js';
+animate();
 
 /* 
 Satta variabler för inloggning 
@@ -15,37 +17,51 @@ Hämtar elementet med id "page-container" från HTML-dokumentet
 */
 const pageContainer = document.getElementById("page-container");
 
-/* SEKTION: FUNKTIONER FÖR INLOGGNING, UTLOGGNING OCH SIDOR */
+/* SEKTION: FUNKTIONER FÖR INLOGGNING OCH UTLOGGNING */
 
+/* 
+Login-funktion som kollar användarnamn och lösenord
+Jämför inmatade värden med satta variabler
+Vid lyckad inloggning, visa välkomstsidan och spara användaren i localStorage
+Vid misslyckad inloggning, visa felmeddelandesidan
+ */
 function login() {
-  const inputUsername = document.getElementById("username").value.toLowerCase();
-  const inputPassword = document.getElementById("password").value;
+    const inputUsername = document.getElementById("username").value.toLowerCase();
+    const inputPassword = document.getElementById("password").value;
 
-  if (inputUsername === username && inputPassword === password) {
-    welcomePage();
-    localStorage.setItem("currentUser", inputUsername);
-    localStorage.setItem("currentPassword", inputPassword);
-  } else {
-    errorPage();
-  }
+    if (inputUsername === username && inputPassword === password) {
+        welcomePage();
+
+        let currentUser = { 
+            username: inputUsername, 
+            password: inputPassword 
+        };
+
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    } else {
+        errorPage();
+    }
 }
 
+/* 
+Logout-funktion som rensar localStorage och visar inloggningssidan
+*/
 function logout() {
-  loginPage();
+    loginPage();
 
-  localStorage.removeItem("currentUser");
-  localStorage.removeItem("currentPassword");
+    localStorage.removeItem("currentUser");
 }
-
 
 /* 
 Här kollar vi om användaren är redan inloggad och sparad i localStorage
+Deklarerar en variabel som hämtar och parsar "currentUser" från localStorage 
 Om nykel och värde i localStorage matchar de satta variablerna, så visas välkomstsidan direkt
 annars visas inloggningssidan
 */
+const savedUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
 if (
-    localStorage.getItem("currentUser") === username &&
-    localStorage.getItem("currentPassword") === password
+    savedUser.username === username &&
+    savedUser.password === password
 ) {
     welcomePage();
 } else {
