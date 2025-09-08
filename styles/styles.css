@@ -1,48 +1,107 @@
-body {
-    color: white;
-    font-family: Arial, sans-serif;
-    background-color: #000000;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-a {
-    color: #fcf378;
+body {
+    background: linear-gradient(135deg, #2C5364, #203A43, #0F2027);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+#page-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 8px;
+    color: #ddd;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f2f2f2;
+    font-size: 1rem;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    background-color: #e0e0e0;
+}
+
+label[for="rememberMe"], #forgotPassword {
+    display: block;
+    margin: 10px 0;
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+#forgotPassword a {
+    color: #aaddff;
     text-decoration: none;
 }
 
-label {
-    display: block;
-    margin-top: 20px;
-}
-
-.page-container {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    height:90vh;
-}
-
-.page-border {
-    border: 2px solid white;
-    padding: 100px;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.15);
+#forgotPassword a:hover {
+    text-decoration: underline;
 }
 
 button {
-    margin-top:10px;
-    padding:10px 20px;
-    background-color:#797979;
-    color:white;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color:#5a5a5a;
-    transform: scale(1.1);
-    transition: all 0.3s ease;
+    background-color: #218838;
+}
+
+#errorMessage, #welcomeMessage {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: #ffdddd;
+}
+
+#backButton, #logoutButton {
+    background-color: #007bff;
+}
+
+#backButton:hover, #logoutButton:hover {
+    background-color: #0069d9;
 }
