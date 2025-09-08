@@ -1,6 +1,8 @@
 export {
   createElement,
-  createInputGroup
+  createInputGroup,
+  createCheckboxGroup,
+  createLinkGroup
 };
 
 /*
@@ -49,8 +51,6 @@ function createInputGroup(labelText, inputOptions) {
   */
   group.appendChild(label);
 
-  group.appendChild(document.createElement("br"));
-
   /* 
     Anropar createElement för att skapa ett input-fält som vi kan sedan sätta olika attribut på 
     */
@@ -60,5 +60,44 @@ function createInputGroup(labelText, inputOptions) {
   /* 
     Returnerar hela gruppen med label och input 
     */
+  return group;
+}
+
+function createCheckboxGroup(labelText, checkboxOptions) {
+  const group = createElement("div", {
+    class: "checkbox-group"
+  });
+
+  const label = createElement("label", {
+    for: checkboxOptions.id
+  });
+
+  const checkbox = createElement("input", {
+    type: "checkbox",
+    id: checkboxOptions.id,
+    name: checkboxOptions.name,
+    required: checkboxOptions.required
+  });
+
+  label.appendChild(checkbox);
+  label.appendChild(document.createTextNode(" " + labelText));
+  group.appendChild(label);
+
+  return group;
+}
+
+function createLinkGroup(linkText, linkOptions) {
+  const group = createElement("div", {
+    class: "link-group"
+  });
+
+  const link = createElement("a", {
+    id: linkOptions.id,
+    href: linkOptions.href,
+    text: linkText
+  });
+
+  group.appendChild(link);
+
   return group;
 }

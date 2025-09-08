@@ -27,7 +27,7 @@ body {
     background: transparent;
 }
 
-#loginLogo {
+#mainLogo {
     filter: drop-shadow(0 0 6px #bd41ce);
     animation: glowLogo 3s ease-in-out infinite alternate;
 }
@@ -102,13 +102,13 @@ label[for="rememberMe"],
     color: #cccccc;
 }
 
-#forgotPassword a {
+#forgotPassword {
     color: #eb88ff;
     text-decoration: none;
     transition: color 0.3s;
 }
 
-#forgotPassword a:hover {
+#forgotPassword:hover {
     text-decoration: underline;
     color: #ffffff;
 }
