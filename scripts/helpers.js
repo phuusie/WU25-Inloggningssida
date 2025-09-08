@@ -13,14 +13,14 @@ Genom att göra en sådan funktion kan vi undvika att upprepa samma kod flera g�
 */
 function createElement(tag, options = {}) {
   const element = document.createElement(tag);
-  if (options.class) element.className = options.class;
-  if (options.id) element.id = options.id;
-  if (options.for) element.htmlFor = options.for;
-  if (options.type) element.type = options.type;
-  if (options.name) element.name = options.name;
-  if (options.required) element.required = true;
-  if (options.text) element.textContent = options.text;
-  if (options.href) element.href = options.href;
+    if (options.class) element.className = options.class;
+    if (options.id) element.id = options.id;
+    if (options.for) element.htmlFor = options.for;
+    if (options.type) element.type = options.type;
+    if (options.name) element.name = options.name;
+    if (options.required) element.required = true;
+    if (options.text) element.textContent = options.text;
+    if (options.href) element.href = options.href;
   return element;
 }
 
