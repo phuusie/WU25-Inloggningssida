@@ -5,20 +5,20 @@ const pageContainer = document.getElementById("page-container");
 
 function createElement(tag, options = {}) {
     const element = document.createElement(tag);
-    if (options.class) element.className = options.class;
-    if (options.id) element.id = options.id;
-    if (options.for) element.htmlFor = options.for;
-    if (options.type) element.type = options.type;
-    if (options.name) element.name = options.name;
-    if (options.required) element.required = true;
-    if (options.text) element.textContent = options.text;
-    if (options.href) element.href = options.href;
+        if (options.class) element.className = options.class;
+        if (options.id) element.id = options.id;
+        if (options.for) element.htmlFor = options.for;
+        if (options.type) element.type = options.type;
+        if (options.name) element.name = options.name;
+        if (options.required) element.required = true;
+        if (options.text) element.textContent = options.text;
+        if (options.href) element.href = options.href;
     return element;
 }
 
 if (
-    localStorage.getItem("loggedInUser") === username &&
-    localStorage.getItem("loggedInPassword") === password
+    localStorage.getItem("currentUser") === username &&
+    localStorage.getItem("currentPassword") === password
 ) {
     welcomePage();
 } else {
@@ -126,8 +126,8 @@ function renderLoginForm() {
 
 function logout() {
     renderLoginForm();
-    localStorage.removeItem("loggedInUser");
-    localStorage.removeItem("loggedInPassword");
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("currentPassword");
 }
 
 function login() { 
@@ -136,12 +136,11 @@ function login() {
 
     if (inputUsername === username && inputPassword === password) {
         welcomePage();
+        localStorage.setItem("currentUser", inputUsername);
+        localStorage.setItem("currentPassword", inputPassword);
     } else {
         errorPage();
     }
-
-    localStorage.setItem("loggedInUser", inputUsername);
-    localStorage.setItem("loggedInPassword", inputPassword);
 }
 
 function welcomePage() {
