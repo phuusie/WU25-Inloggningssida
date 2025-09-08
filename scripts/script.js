@@ -104,13 +104,6 @@ function createForgotPassword() {
 
 /* SEKTION: FUNKTIONER FÖR INLOGGNING, UTLOGGNING OCH SIDOR */
 
-function logout() {
-  loginPage();
-
-  localStorage.removeItem("currentUser");
-  localStorage.removeItem("currentPassword");
-}
-
 function login() {
   const inputUsername = document.getElementById("username").value.toLowerCase();
   const inputPassword = document.getElementById("password").value;
@@ -123,6 +116,14 @@ function login() {
     errorPage();
   }
 }
+
+function logout() {
+  loginPage();
+
+  localStorage.removeItem("currentUser");
+  localStorage.removeItem("currentPassword");
+}
+
 
 /* 
 Här kollar vi om användaren är redan inloggad och sparad i localStorage
@@ -150,6 +151,16 @@ function loginPage() {
         class: "page-border" 
     });
 
+    const logo = createElement("img", {
+      id: "loginLogo"
+    });
+
+    logo.src = "./assets/logo/logo.png";
+    logo.alt = "Logo";
+    logo.style.maxWidth = "60px";
+    logo.style.marginBottom = "20px";
+    pageBorder.appendChild(logo);
+    
     const h2 = createElement("h1", { 
         text: "LOGIN" 
     });
@@ -230,6 +241,7 @@ function errorPage() {
     pageContainer.innerHTML = "";
 
     const h1 = createElement("h1", {
+        id: "errorPage",
         text: "Inloggning misslyckades"
     });
     pageContainer.appendChild(h1);
