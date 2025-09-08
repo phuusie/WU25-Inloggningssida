@@ -14,7 +14,7 @@ function createElement(tag, options = {}) {
     if (options.text) element.textContent = options.text;
     if (options.href) element.href = options.href;
     return element;
-    }
+}
 
 function createInputGroup(labelText, inputOptions) {
     const group = createElement("div", { 
@@ -186,4 +186,15 @@ function errorPage() {
     backButton.onclick = logout;
 }
 
+function saveToLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+}
 
+function getFromLocalStorage(key) {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+}
+
+function removeFromLocalStorage(key) {
+    localStorage.removeItem(key);
+}
