@@ -30,6 +30,7 @@ function createInputGroup(labelText, inputOptions) {
   group.appendChild(document.createElement("br"));
 
   const input = createElement("input", inputOptions);
+  
   group.appendChild(input);
 
   return group;
@@ -109,8 +110,8 @@ function renderLoginForm() {
     type: "submit",
     text: "Logga in"
   });
-  form.appendChild(loginButton);
 
+  form.appendChild(loginButton);
   pageBorder.appendChild(form);
   pageContainer.appendChild(pageBorder);
 
@@ -167,10 +168,12 @@ function errorPage() {
   const h1 = createElement("h1", {
     text: "Inloggning misslyckades"
   });
+
   pageContainer.appendChild(h1);
   const p = createElement("p", {
     text: "Kontrollera ditt namn och lösenord och försök igen."
   });
+
   pageContainer.appendChild(p);
 
   const backButton = createElement("button", {
@@ -179,6 +182,6 @@ function errorPage() {
   });
 
   pageContainer.appendChild(backButton);
-  
+
   backButton.onclick = logout;
 }
