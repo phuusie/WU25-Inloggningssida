@@ -117,12 +117,18 @@ function loginPage() {
         })
     );
 
+    /* 
+    Placeholder for checkbox "Kom ihåg mig"
+    */
     form.appendChild(
         createCheckboxGroup("Kom ihåg mig", {
         id: "rememberMe"
         })
     );
 
+    /* 
+    Placeholder för länk för återställning av lösenord
+    */
     form.appendChild(createLinkGroup("Glömt lösenord?", {
         id: "forgotPassword",
         href: "#",
