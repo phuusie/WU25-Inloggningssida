@@ -50,12 +50,9 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.15);
     transition: transform 0.3s ease;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.05), 
-            0 0 40px rgba(255, 255, 255, 0.04), 
-            0 0 80px rgba(255, 255, 255, 0.02);
-}
-
-#page-container:hover {
-    transform: scale(1.01);
+                0 0 40px rgba(255, 255, 255, 0.13), 
+                0 0 80px rgba(255, 255, 255, 0.02);
+    opacity: 0.9;
 }
 
 h1, h2 {
@@ -64,6 +61,7 @@ h1, h2 {
     font-size: 2rem;
     color: #ffffff;
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    opacity: 1;
 }
 
 .form-group {
@@ -84,17 +82,20 @@ h1, h2 {
     padding: 12px 15px;
     border: none;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.8);
     font-size: 1rem;
-    color: #333;
+    color: white;
     transition: all 0.3s ease;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    opacity: 0.85;
 }
 
 .form-group input:focus {
     outline: none;
-    background-color: #ffffff;
-    box-shadow: 0 0 0 2px #66afe9;
+    background-color: #6e3a74;
+    box-shadow: 0 0 5px 1.5px #ffffff46;
+    color: white;
+    opacity: 1;
 }
 
 label[for="rememberMe"],
@@ -106,7 +107,7 @@ label[for="rememberMe"],
 }
 
 #forgotPassword a {
-    color: #aaddff;
+    color: #eb88ff;
     text-decoration: none;
     transition: color 0.3s;
 }
@@ -120,7 +121,7 @@ button {
     padding: 14px 22px;
     border: none;
     border-radius: 10px;
-    background: linear-gradient(135deg, #28a745, #218838);
+    background: linear-gradient(135deg, #bd41ce, #680868);
     color: white;
     font-weight: bold;
     font-size: 1rem;
@@ -131,7 +132,7 @@ button {
 }
 
 button:hover {
-    background: linear-gradient(135deg, #218838, #1e7e34);
+    background: linear-gradient(135deg, #680868, #bd41ce);
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
@@ -139,10 +140,10 @@ button:hover {
 #backButton,
 #logoutButton {
     margin-top: 50px;
-    background: linear-gradient(135deg, #007bff, #0069d9);
+    background: linear-gradient(135deg, #bd41ce, #680868);
 }
 
 #backButton:hover,
 #logoutButton:hover {
-    background: linear-gradient(135deg, #0069d9, #0056b3);
+    background: linear-gradient(135deg, #680868, #bd41ce);
 }

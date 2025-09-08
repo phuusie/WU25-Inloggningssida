@@ -16,6 +16,15 @@ function createElement(tag, options = {}) {
     return element;
 }
 
+if (
+    localStorage.getItem("loggedInUser") === username &&
+    localStorage.getItem("loggedInPassword") === password
+) {
+    welcomePage();
+} else {
+    renderLoginForm();
+}
+
 function createInputGroup(labelText, inputOptions) {
     const group = createElement("div", { 
         class: "form-group" 
@@ -24,13 +33,11 @@ function createInputGroup(labelText, inputOptions) {
     const label = createElement("label", {
         for: inputOptions.id,
         text: labelText
-    });
-
+    });  
     group.appendChild(label);
     group.appendChild(document.createElement("br"));
 
     const input = createElement("input", inputOptions);
-
     group.appendChild(input);
 
     return group;
@@ -44,7 +51,6 @@ function createRememberMe() {
         id: "rememberMe",
         name: "rememberMe"
     });
-
     label.appendChild(input);
     label.appendChild(document.createTextNode(" Kom ihåg mig"));
 
@@ -60,7 +66,6 @@ function createForgotPassword() {
         href: "#", 
         text: "Glömt lösenord?" 
     });
-
     label.appendChild(link);
 
     return label;
@@ -76,7 +81,6 @@ function renderLoginForm() {
     const h2 = createElement("h1", { 
         text: "LOGIN" 
     });
-
     pageBorder.appendChild(h2);
 
     const form = createElement("form", { 
@@ -110,7 +114,6 @@ function renderLoginForm() {
         type: "submit",
         text: "Logga in"
     });
-
     form.appendChild(loginButton);
     pageBorder.appendChild(form);
     pageContainer.appendChild(pageBorder);
@@ -122,19 +125,23 @@ function renderLoginForm() {
 }
 
 function logout() {
-  renderLoginForm();
+    renderLoginForm();
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("loggedInPassword");
 }
 
-window.addEventListener("DOMContentLoaded", renderLoginForm);
-
-function login() {
+function login() { 
     const inputUsername = document.getElementById("username").value.toLowerCase();
     const inputPassword = document.getElementById("password").value;
+
     if (inputUsername === username && inputPassword === password) {
         welcomePage();
     } else {
         errorPage();
     }
+
+    localStorage.setItem("loggedInUser", inputUsername);
+    localStorage.setItem("loggedInPassword", inputPassword);
 }
 
 function welcomePage() {
@@ -156,7 +163,6 @@ function welcomePage() {
         id: "logoutButton",
         text: "Logga ut"
     });
-
     pageContainer.appendChild(logoutButton);
 
     logoutButton.onclick = logout;
@@ -168,33 +174,18 @@ function errorPage() {
     const h1 = createElement("h1", {
         text: "Inloggning misslyckades"
     });
-
     pageContainer.appendChild(h1);
+
     const p = createElement("p", {
         text: "Kontrollera ditt namn och lösenord och försök igen."
     });
-
     pageContainer.appendChild(p);
 
     const backButton = createElement("button", {
         id: "backButton",
         text: "Tillbaka"
     });
-
     pageContainer.appendChild(backButton);
 
     backButton.onclick = logout;
-}
-
-function saveToLocalStorage(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
-}
-
-function getFromLocalStorage(key) {
-    const value = localStorage.getItem(key);
-    return value ? JSON.parse(value) : null;
-}
-
-function removeFromLocalStorage(key) {
-    localStorage.removeItem(key);
 }
