@@ -16,7 +16,7 @@ function createElement(tag, options = {}) {
     return element;
     }
 
-    function createInputGroup(labelText, inputOptions) {
+function createInputGroup(labelText, inputOptions) {
     const group = createElement("div", { 
         class: "form-group" 
     });
