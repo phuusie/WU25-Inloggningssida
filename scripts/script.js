@@ -1,19 +1,19 @@
 /* 
-    Satta variabler för inloggning 
+Satta variabler för inloggning 
 */
 const username = "admin";
 const password = "123";
 
 /* 
-    Hämtar elementet med id "page-container" från HTML-dokumentet 
+Hämtar elementet med id "page-container" från HTML-dokumentet 
 */
 const pageContainer = document.getElementById("page-container");
 
 /*
-    Funktion för att skapa ett HTML-element med specifika attribut.
-    Exemple: createElement("tag", {class: "my-class", id: "my-id");
-    Detta skapar ett element av typen "tag" med attributen class = "my-class", id = "my-id".
-    Genom att göra en sådan funktion kan vi undvika att upprepa samma kod flera gånger när vi skapar olika HTML-element.
+Funktion för att skapa ett HTML-element med specifika attribut.
+Exemple: createElement("tag", {class: "my-class", id: "my-id");
+Detta skapar ett element av typen "tag" med attributen class = "my-class", id = "my-id".
+Genom att göra en sådan funktion kan vi undvika att upprepa samma kod flera gånger när vi skapar olika HTML-element.
 */
 function createElement(tag, options = {}) {
     const element = document.createElement(tag);
@@ -28,14 +28,14 @@ function createElement(tag, options = {}) {
     return element;
 }
 
-/* FUNKTIONER FÖR ATT MINIMERA REPETITIV KOD */
+/* SEKTION: FUNKTIONER FÖR ATT MINIMERA REPETITIV KOD */
 
 /* 
-    Funktion för att skapa ett input-fält med matchande label 
+Funktion för att skapa ett input-fält med matchande label 
 */
 function createInputGroup(labelText, inputOptions) {
     /*  
-        Anropar createElement för att skapa en div med klassen "form-group" 
+    Anropar createElement för att skapa en div med klassen "form-group" 
     */
     const group = createElement("div", { 
         class: "form-group" 
@@ -50,14 +50,14 @@ function createInputGroup(labelText, inputOptions) {
     });  
 
     /* 
-        group är div elementet vi skapade ovan 
-        appendChild lägger vi till elementen i div elementet
+    group är div elementet vi skapade ovan 
+    appendChild lägger vi till elementen i div elementet
     */
     group.appendChild(label);
     group.appendChild(document.createElement("br"));
 
     /* 
-        Anropar createElement för att skapa ett input-fält som vi kan sedan sätta olika attribut på 
+    Anropar createElement för att skapa ett input-fält som vi kan sedan sätta olika attribut på 
     */
     const input = createElement("input", inputOptions);
     group.appendChild(input);
@@ -69,7 +69,7 @@ function createInputGroup(labelText, inputOptions) {
 }
 
 /* 
-    Lades till bara för att skapa checkboxen "Kom ihåg mig" 
+Lades till bara för att skapa checkboxen "Kom ihåg mig" 
 */
 function createRememberMe() {
     const label = createElement("label");
@@ -86,7 +86,7 @@ function createRememberMe() {
 }
 
 /* 
-    Lades till bara för att skapa länken "Glömt lösenord?" 
+Lades till bara för att skapa länken "Glömt lösenord?" 
 */
 function createForgotPassword() {
     const label = createElement("label", { 
@@ -102,7 +102,7 @@ function createForgotPassword() {
     return label;
 }
 
-/* FUNKTIONER FÖR INLOGGNING, UTLOGGNING OCH SIDOR */
+/* SEKTION: FUNKTIONER FÖR INLOGGNING, UTLOGGNING OCH SIDOR */
 
 function logout() {
   loginPage();
@@ -125,9 +125,9 @@ function login() {
 }
 
 /* 
-    Här kollar vi om användaren är redan inloggad och sparad i localStorage
-    Om nykel och värde i localStorage matchar de satta variablerna, så visas välkomstsidan direkt
-    annars visas inloggningssidan
+Här kollar vi om användaren är redan inloggad och sparad i localStorage
+Om nykel och värde i localStorage matchar de satta variablerna, så visas välkomstsidan direkt
+annars visas inloggningssidan
 */
 if (
     localStorage.getItem("currentUser") === username &&
@@ -138,10 +138,10 @@ if (
     loginPage();
 }
 
-/* PAGE SEKTIONEN */
+/* SEKTION: PAGES */
 
 /* 
-    Landningssidan / Inloggningssidan 
+Landningssidan / Inloggningssidan 
 */
 function loginPage() {
     pageContainer.innerHTML = "";
