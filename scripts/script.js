@@ -12,43 +12,62 @@ import {
 
 animate();
 
-const username = "admin";
-const password = "123";
+const users = [
+    { username: "admin", password: "123" },
+    { username: "user", password: "password" },
+    { username: "test", password: "1234" }
+];
+
+const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
 
 const pageContainer = document.getElementById("page-container");
+
+function findUser(username, password) {
+  return users.find(
+    (user) => user.username === username && user.password === password
+  );
+}
+
+function isLoggedIn() {
+  return (
+    currentUser.username &&
+    currentUser.password &&
+    findUser(currentUser.username, currentUser.password)
+  );
+}
+
+if (isLoggedIn()) {
+  welcomePage(currentUser);
+} else {
+  loginPage();
+}
+
 
 function login() {
     const inputUsername = document.getElementById("username").value.toLowerCase();
     const inputPassword = document.getElementById("password").value;
+    const user = findUser(inputUsername, inputPassword);
 
-    if (inputUsername === username && inputPassword === password) {
-        welcomePage();
+    if (!user) {
+        errorPage();
+    } 
 
-        let currentUser = { 
-            username: inputUsername, 
-            password: inputPassword 
+    if (document.getElementById("rememberMe").checked) {
+        let currentUser = {
+            username: user.username,
+            password: user.password
         };
 
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    } else {
-        errorPage();
     }
+
+    welcomePage(user);
 }
 
 function logout() {
     loginPage();
 
     localStorage.removeItem("currentUser");
-}
-
-const savedUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
-if (
-    savedUser.username === username &&
-    savedUser.password === password
-) {
-    welcomePage();
-} else {
-    loginPage();
 }
 
 function loginPage() {
@@ -100,6 +119,13 @@ function loginPage() {
         text: "Återställ lösenord"
     }));
 
+    document.addEventListener("click", (event) => {
+        if (event.target && event.target.id === "forgotPassword") {
+            event.preventDefault();
+            forgotPasswordPage();
+        }
+    });
+
     form.appendChild(document.createElement("br"));
 
     const loginButton = createElement("button", {
@@ -117,13 +143,13 @@ function loginPage() {
     });
 }
 
-function welcomePage() {
+function welcomePage(user) {
     pageContainer.innerHTML = "";
     pageContainer.classList.add("welcome-container");
     pageContainer.appendChild(addIcon());
 
     const h2 = createElement("h2", {
-        text: `Välkommen, ${username.toUpperCase()}!`
+        text: `Välkommen, ${user.username.toUpperCase()}!`
     });
     pageContainer.appendChild(h2);
 
@@ -167,3 +193,38 @@ function errorPage() {
 
     backButton.onclick = logout;
 }
+
+function forgotPasswordPage() {
+    pageContainer.innerHTML = "";
+    pageContainer.classList.remove("welcome-container");
+    pageContainer.appendChild(addIcon());
+
+    const h1 = createElement("h1", {
+        id: "forgotPasswordPage",
+        text: "Återställ lösenord"
+    });
+    pageContainer.appendChild(h1);
+
+    const form = createInputGroup("Ange ditt namn", {
+        type: "text",
+        id: "resetUsername",
+        name: "resetUsername",
+        required: true
+    });
+    pageContainer.appendChild(form);
+
+    const resetButton = createElement("button", {
+        id: "resetButton",
+        text: "Återställ lösenord"
+    });
+    form.appendChild(resetButton);
+
+    const backButton = createElement("button", {
+        id: "backButton",
+        text: "Tillbaka"
+    });
+    pageContainer.appendChild(backButton);
+
+    backButton.onclick = logout;
+}
+
