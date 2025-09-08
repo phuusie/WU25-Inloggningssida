@@ -186,31 +186,4 @@ function errorPage() {
     backButton.onclick = logout;
 }
 
-function toggleTheme() {
-  const body = document.body;
-  const currentTheme = body.dataset.theme;
 
-  if (currentTheme === "light") {
-    setTheme("dark");
-  } else {
-    setTheme("light");
-  }
-}
-
-function setTheme(theme) {
-  document.body.dataset.theme = theme;
-  localStorage.setItem("theme", theme);
-
-  const toggleBtn = document.getElementById("themeToggle");
-  if (toggleBtn) {
-    toggleBtn.textContent =
-      theme === "light" ? "Byt till Mörkt Läge" : "Byt till Ljust Läge";
-  }
-}
-
-// Load saved theme on page load
-window.addEventListener("DOMContentLoaded", () => {
-  const savedTheme = localStorage.getItem("theme") || "dark";
-  setTheme(savedTheme);
-  renderLoginForm(); // Ensure form re-renders after setting theme
-});
