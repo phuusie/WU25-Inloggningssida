@@ -196,7 +196,9 @@ function loginPage() {
     });
 }
 
-
+/* 
+Välkomstsidan efter lyckad inloggning 
+*/
 function welcomePage() {
     pageContainer.innerHTML = "";
 
@@ -221,6 +223,9 @@ function welcomePage() {
     logoutButton.onclick = logout;
 }
 
+/* 
+Felmeddelandesidan vid misslyckad inloggning 
+*/
 function errorPage() {
     pageContainer.innerHTML = "";
 
