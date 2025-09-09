@@ -77,14 +77,14 @@ function createLinkGroup(linkText, linkOptions) {
 }
 
 function addIcon() {
-      const logo = createElement("img", {
-          id: "mainLogo"
-      });
-  
-      logo.src = "./assets/logo/logo.png";
-      logo.alt = "Logo";
-      logo.style.maxWidth = "60px";
-      logo.style.marginBottom = "20px";
+  const logo = createElement("img", {
+      id: "mainLogo"
+  });
 
-      return logo;
+  logo.src = "./assets/logo/logo.png";
+  logo.alt = "Logo";
+  logo.style.maxWidth = "60px";
+  logo.style.marginBottom = "20px";
+
+  return logo;
 }

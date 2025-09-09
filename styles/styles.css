@@ -70,6 +70,7 @@ h1, h2 {
         0 0 10px #e600ff,
         0 0 20px #bd41ce;
 }
+
 .form-group {
     margin-bottom: 20px;
     text-align: left;
@@ -152,17 +153,24 @@ button:hover {
     transform: translateY(-2px);
 }
 
-#backButton,
-#logoutButton{
+#backButton {
     margin-top: 50px;
     background: linear-gradient(135deg, #bd41ce, #680868);
+}
+
+#logoutButton {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    width: 25%;
+    z-index: 1000;
 }
 
 #backButton:hover,
 #logoutButton:hover, #resetButton:hover {
     background: linear-gradient(135deg, #680868, #bd41ce);
 }
-
 
 input:focus-visible,
 button:focus-visible {

@@ -227,4 +227,3 @@ function forgotPasswordPage() {
 
     backButton.onclick = logout;
 }
-
