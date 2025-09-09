@@ -70,6 +70,10 @@ function logout() {
     localStorage.removeItem("currentUser");
 }
 
+function restorePassword(username) {
+    restoredPasswordPage(username);
+}
+
 function loginPage() {
     pageContainer.innerHTML = "";
     pageContainer.classList.remove("welcome-container");
@@ -121,24 +125,37 @@ function loginPage() {
 
     document.addEventListener("click", (event) => {
         if (event.target && event.target.id === "forgotPassword") {
-            event.preventDefault();
             forgotPasswordPage();
         }
     });
 
     form.appendChild(document.createElement("br"));
 
+    const buttonsDiv = createElement("div", { class: "button-group" });
+    form.appendChild(buttonsDiv);
+
     const loginButton = createElement("button", {
         id: "loginButton",
         type: "submit",
         text: "Logga in"
     });
-    form.appendChild(loginButton);
+    buttonsDiv.appendChild(loginButton);
+
+    const registerButton = createElement("button", {
+        id: "registerButton",
+        type: "button",
+        text: "Registrera"
+    });
+    buttonsDiv.appendChild(registerButton);
+
+    registerButton.onclick = () => {
+        alert("Registreringsfunktionen är inte implementerad än.");
+    };
+
     pageBorder.appendChild(form);
     pageContainer.appendChild(pageBorder);
 
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
+    form.addEventListener("submit", () => {
         login();
     });
 }
@@ -219,6 +236,11 @@ function forgotPasswordPage() {
     });
     form.appendChild(resetButton);
 
+    resetButton.onclick = () => {
+        const username = form.querySelector("#resetUsername").value;
+        restorePassword(username);
+    };
+
     const backButton = createElement("button", {
         id: "backButton",
         text: "Tillbaka"
@@ -226,4 +248,34 @@ function forgotPasswordPage() {
     pageContainer.appendChild(backButton);
 
     backButton.onclick = logout;
+}
+
+function restoredPasswordPage(username) {
+    pageContainer.innerHTML = "";
+    pageContainer.classList.remove("welcome-container");
+    pageContainer.appendChild(addIcon());
+
+    const h1 = createElement("h1", {
+        id: "resetPasswordPage",
+        text: "Ditt lösenord är:"
+    });
+    pageContainer.appendChild(h1);
+
+    const user = users.find(u => u.username === username);
+    const p = createElement("p", {
+        text: user ? `Ditt lösenord är: ${user.password}` : "Användaren finns inte!"
+    });
+    pageContainer.appendChild(p);
+
+    const backButton = createElement("button", {
+        id: "backButton",
+        text: "Tillbaka"
+    });
+    pageContainer.appendChild(backButton);
+
+    if (user != null) {
+        backButton.onclick = loginPage;
+    } else {
+        backButton.onclick = forgotPasswordPage;
+    }
 }

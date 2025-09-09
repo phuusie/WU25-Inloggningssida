@@ -140,7 +140,7 @@ button {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-#loginButton, #backButton, #resetButton {
+#backButton, #resetButton {
     width: 100%;
 }
 
@@ -151,6 +151,13 @@ button:hover {
         0 0 20px #ff99ff,
         0 0 30px #ff99ff;
     transform: translateY(-2px);
+}
+
+.button-group {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
 }
 
 #backButton {
