@@ -1,5 +1,3 @@
-export { animate};
-
 const canvas = document.getElementById("starfield");
 const ctx = canvas.getContext("2d");
 
@@ -26,7 +24,7 @@ for (let i = 0; i < numStars; i++) {
   });
 }
 
-function animate() {
+export function animate() {
   time += 0.02;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -64,6 +62,4 @@ function animate() {
 
   requestAnimationFrame(animate);
 }
-
-animate();
 

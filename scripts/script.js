@@ -23,9 +23,9 @@ const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
 const pageContainer = document.getElementById("page-container");
 
 function findUser(username, password) {
-  return users.find(
-    (user) => user.username === username && user.password === password
-  );
+    return users.find(
+        (user) => user.username === username && user.password === password
+    );
 }
 
 function isLoggedIn() {
@@ -37,9 +37,9 @@ function isLoggedIn() {
 }
 
 if (isLoggedIn()) {
-  welcomePage(currentUser);
+    welcomePage(currentUser);
 } else {
-  loginPage();
+    loginPage();
 }
 
 
@@ -68,10 +68,6 @@ function logout() {
     loginPage();
 
     localStorage.removeItem("currentUser");
-}
-
-function restorePassword(username) {
-    restoredPasswordPage(username);
 }
 
 function loginPage() {
@@ -124,14 +120,17 @@ function loginPage() {
     }));
 
     document.addEventListener("click", (event) => {
-        if (event.target && event.target.id === "forgotPassword") {
+        if (event.target?.id === "forgotPassword") {
+            event.preventDefault();
             forgotPasswordPage();
         }
     });
 
     form.appendChild(document.createElement("br"));
 
-    const buttonsDiv = createElement("div", { class: "button-group" });
+    const buttonsDiv = createElement("div", {
+        class: "button-group"
+    });
     form.appendChild(buttonsDiv);
 
     const loginButton = createElement("button", {
@@ -155,7 +154,8 @@ function loginPage() {
     pageBorder.appendChild(form);
     pageContainer.appendChild(pageBorder);
 
-    form.addEventListener("submit", () => {
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
         login();
     });
 }
@@ -211,6 +211,10 @@ function errorPage() {
     backButton.onclick = logout;
 }
 
+function restorePassword(username) {
+    restoredPasswordPage(username);
+}
+
 function forgotPasswordPage() {
     pageContainer.innerHTML = "";
     pageContainer.classList.remove("welcome-container");
@@ -222,24 +226,32 @@ function forgotPasswordPage() {
     });
     pageContainer.appendChild(h1);
 
-    const form = createInputGroup("Ange ditt namn", {
+    const form = createElement("form", {
+        id: "resetForm"
+    });
+    pageContainer.appendChild(form);
+
+    const usernameInput = createInputGroup("Ange ditt namn", {
         type: "text",
         id: "resetUsername",
         name: "resetUsername",
         required: true
     });
-    pageContainer.appendChild(form);
+    form.appendChild(usernameInput);
 
     const resetButton = createElement("button", {
         id: "resetButton",
+        type: "submit",
         text: "Återställ lösenord"
     });
     form.appendChild(resetButton);
 
-    resetButton.onclick = () => {
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
         const username = form.querySelector("#resetUsername").value;
         restorePassword(username);
-    };
+    });
 
     const backButton = createElement("button", {
         id: "backButton",

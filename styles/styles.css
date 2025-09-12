@@ -126,6 +126,10 @@ label[for="rememberMe"],
         2px 2px 8px #bd41ce;
 }
 
+#resetButton {
+    margin-top: -15px;
+}
+
 button {
     padding: 14px 22px;
     border: none;
@@ -143,6 +147,7 @@ button {
 #backButton, #resetButton {
     width: 100%;
 }
+
 
 button:hover {
     background: linear-gradient(135deg, #ff4dff, #9900cc);
