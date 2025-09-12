@@ -16,6 +16,8 @@ function createElement(tag, options = {}) {
     if (options.required) element.required = true;
     if (options.text) element.textContent = options.text;
     if (options.href) element.href = options.href;
+    if (options.src) element.src = options.src;
+    if (options.alt) element.alt = options.alt;
   return element;
 }
 
@@ -78,11 +80,11 @@ function createLinkGroup(linkText, linkOptions) {
 
 function addIcon() {
   const logo = createElement("img", {
-      id: "mainLogo"
+    id: "mainLogo",
+    src: "./assets/logo/logo.png",
+    alt: "Logo"
   });
 
-  logo.src = "./assets/logo/logo.png";
-  logo.alt = "Logo";
   logo.style.maxWidth = "60px";
   logo.style.marginBottom = "20px";
 

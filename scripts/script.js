@@ -7,7 +7,7 @@ import {
 } from './helpers.js';
 
 import { 
-    animate 
+    animate
 } from './animations.js';
 
 animate();
@@ -42,7 +42,6 @@ if (isLoggedIn()) {
     loginPage();
 }
 
-
 function login() {
     const inputUsername = document.getElementById("username").value.toLowerCase();
     const inputPassword = document.getElementById("password").value;
@@ -69,6 +68,12 @@ function logout() {
 
     localStorage.removeItem("currentUser");
 }
+
+function restorePassword(username) {
+    restoredPasswordPage(username);
+}
+
+/* Views */
 
 function loginPage() {
     pageContainer.innerHTML = "";
@@ -209,10 +214,6 @@ function errorPage() {
     pageContainer.appendChild(backButton);
 
     backButton.onclick = logout;
-}
-
-function restorePassword(username) {
-    restoredPasswordPage(username);
 }
 
 function forgotPasswordPage() {
